@@ -2,6 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
 
 /**
  * Top level chrome module which creates the main Electron BrowserWindow and 
@@ -21,9 +22,13 @@ var Chrome = {
         webviewTag: true
       }
     });
-    // Load shell.html as chrome
+    
+    // Workaround for https://github.com/electron/electron/issues/21259
+    Menu.setApplicationMenu(null);
+
+    // Load kiosk.html as chrome
     this.mainWindow.loadURL(url.format({
-      pathname: path.join(__dirname, 'chrome/shell.html'),
+      pathname: path.join(__dirname, 'chrome/kiosk.html'),
       protocol: 'file:',
       slashes: true
     }));

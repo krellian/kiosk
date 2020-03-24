@@ -8,7 +8,7 @@ const router = express.Router();
 const chrome = require('../../chrome');
 
 /**
- * Loads a URL as content inside Shell's system chrome.
+ * Loads a URL as content inside Kiosk's system chrome.
  */
 router.post('/loadURL', function(request, response) {
   if (request.body.loadURL && request.body.loadURL.input) {

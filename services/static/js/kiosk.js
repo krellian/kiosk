@@ -1,5 +1,5 @@
 /**
- * Webian Kiosk web interface.
+ * Krellian Kiosk web interface.
  */
 var Kiosk = {
   

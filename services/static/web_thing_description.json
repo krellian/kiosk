@@ -1,5 +1,5 @@
 {
-  "title": "Webian Kiosk",
+  "title": "Krellian Kiosk",
   "actions": {
     "loadURL": {
       "input": {"type": "string"},

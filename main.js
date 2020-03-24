@@ -1,16 +1,16 @@
 /**
- * Webian Shell Kiosk.
+ * Krellian Kiosk.
  *
- * Main script starts up Webian Shell chrome and services.
+ * Main script starts up kiosk chrome and services.
  */
 const electron = require('electron');
 const app = electron.app;
 const services = require('./services');
 const chrome = require('./chrome');
 
-function startShell() {
+function startKiosk() {
   services.start();
   chrome.start();
 }
 
-app.on('ready', startShell);
+app.on('ready', startKiosk);

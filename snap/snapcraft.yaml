@@ -1,7 +1,7 @@
-name: webian-shell-kiosk
+name: krellian-kiosk
 version: '0.1'
-summary: Webian Shell Kiosk
-description: Kiosk software powered by the web
+summary: Krellian Kiosk
+description: A kiosk runtime for web content
 base: core18
 confinement: strict
 grade: devel
@@ -10,10 +10,10 @@ architectures:
   - build-on: armhf
   
 apps:
-  webian-shell-kiosk:
+  krellian-kiosk:
     daemon: simple
     restart-condition: always
-    command: desktop-launch xwayland-kiosk-launch "$SNAP/webian-shell-kiosk/webian-shell-kiosk"  "--no-sandbox"
+    command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk"  "--no-sandbox"
     environment:
       XWAYLAND_FULLSCREEN_WINDOW_HINT: window_role="browser-window"
     slots: [ x11 ]
@@ -34,9 +34,9 @@ plugs:
     interface: x11
 
 parts:
-  webian-shell-kiosk:
+  krellian-kiosk:
     plugin: nodejs
-    source: https://github.com/webianproject/shell-kiosk.git
+    source: https://github.com/krellian/kiosk.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |
         case $SNAPCRAFT_ARCH_TRIPLET in
@@ -48,7 +48,7 @@ parts:
         esac
         npm install electron-packager &&
         ELECTRON_GET_USE_PROXY=1 ./node_modules/.bin/electron-packager . --overwrite --platform=linux --arch=$ARCH --output=release-build --prune=true
-        cp -v -R ./webian-shell-kiosk-linux-$ARCH $SNAPCRAFT_PART_INSTALL/webian-shell-kiosk
+        cp -v -R ./krellian-kiosk-linux-$ARCH $SNAPCRAFT_PART_INSTALL/krellian-kiosk
     stage-packages:
     - libasound2
     - libgconf-2-4
