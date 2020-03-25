@@ -1,5 +1,7 @@
 # Krellian Kiosk
 
+[![Snap Status](https://build.snapcraft.io/badge/krellian/kiosk.svg)](https://build.snapcraft.io/user/krellian/kiosk)
+
 Krellian Kiosk is a web runtime for interactive kiosks and digital signage.
 
 It acts as both a web client (to render web content) and a web server (so that screens can be remotely managed over the internet).
