@@ -24,7 +24,7 @@ The web client uses Electron and the web server uses NodeJS.
 
 ## Copyrights, Trademarks and Licensing
 
-© Ben Francis 2020
+© Krellian Ltd. 2020
 
 Krellian Kiosk is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
