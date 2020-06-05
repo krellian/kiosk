@@ -1,5 +1,6 @@
 const express = require('express');
 const router = require('./services/router');
+const networkManager = require('./services/models/network-manager');
 const PORT = 8080;
 
 /**
@@ -8,6 +9,10 @@ const PORT = 8080;
  */
 var Services = {
   start: function() {
+    // Start network manager
+    networkManager.start();
+    
+    // Start HTTP server
     this.server = express();
     this.server.use(router);
     this.server.listen(PORT, () => 

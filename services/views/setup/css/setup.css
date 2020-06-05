@@ -1,0 +1,237 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/opensans-regular.woff") format("woff");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-style: normal;
+  src: url("/fonts/opensans-semibold.woff") format("woff");
+}
+
+html, body {
+	width: 100%;
+  height: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 10px;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: #333333;
+}
+
+.hidden {
+  display: none;
+}
+
+input[type=text], input[type=password] {
+  border-radius: 0.5rem;
+  border: none;
+  height: 3.2rem;
+  font-size: 1.6rem;
+  padding: 0.75rem;
+  box-sizing: border-box;
+}
+
+button, input[type=submit] {
+  background-color: #648d32;
+  height: 3.2rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.7rem;
+  color: #fff;
+  margin: 1rem;
+}
+
+button:hover, input[type=submit]:hover {
+  background-color: #90bc5c;
+}
+
+.back-button {
+  display: block;
+  position: fixed;
+  left: 2rem;
+  top: 2rem;
+  width: 5.6rem;
+  height: 5.6rem;
+  background-image: url(../images/back.svg);
+  background-size: 5.6rem;
+  opacity: 0.9;
+}
+
+.back-button:hover {
+  opacity: 1;
+}
+
+#wordmark {
+  display: block;
+  margin: 0 auto;
+  padding: 3.3rem;
+  height: 3rem;
+}
+
+#wifi-connect {
+  padding: 2rem;
+}
+
+#wifi-connect h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+#wifi-networks {
+  display: block;
+  padding: 0;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 55rem;
+}
+
+.wifi-network-item {
+  box-sizing: border-box;
+  height: 5.6rem;
+  list-style-type: none;
+  color: #fff;
+  font-size: 1.8rem;
+  background-color: #4d4d4d;
+  border-radius: 0.5rem;
+  padding: 1.2rem;
+  margin: 1rem;
+}
+
+.wifi-network-item:hover {
+  background-color: #666;
+}
+
+.wifi-network-ssid {
+  line-height: 3.2rem;
+}
+
+.wifi-network-security {
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 0;
+  float: right;
+  background-image: url('../images/wifi-sprite.svg');
+}
+
+/** Wi-Fi icon sprite **/
+.insecure-0 {
+  background-position: 0 0;
+}
+
+.insecure-1 {
+  background-position: 12.8rem 0;
+}
+
+.insecure-2 {
+  background-position: 9.6rem 0;
+}
+
+.insecure-3 {
+  background-position: 6.4rem 0;
+}
+
+.insecure-4 {
+  background-position: 3.2rem 0;
+}
+
+.secure-0 {
+  background-position: 0 3.2rem;
+}
+
+.secure-1 {
+  background-position: 12.8rem 3.2rem;
+}
+
+.secure-2 {
+  background-position: 9.6rem 3.2rem;
+}
+
+.secure-3 {
+  background-position: 6.4rem 3.2rem;
+}
+
+.secure-4 {
+  background-position: 3.2rem 3.2rem;
+}
+
+#wifi-password-prompt {
+  width: 50rem;
+  height: 15rem;
+  margin: 0 auto;
+  top: calc(50% - 18rem);
+  position: relative;
+  text-align: center;
+}
+
+#wifi-password-prompt h1, #wifi-connecting h1 {
+  font-size: 2.2rem;
+  color: #fff;
+  font-weight: normal;
+}
+
+#wifi-password-prompt h1 img {
+  margin-right: 0.5rem;
+}
+
+#wifi-password-prompt h1 span {
+  display: inline-block;
+  line-height: 3.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 46rem;
+}
+
+#wifi-password-prompt form {
+  width: 27rem;
+  margin: 0 auto;
+}
+
+#wifi-password-checkbox {
+  display: none;
+}
+
+#wifi-show-password {
+  display: block;
+  text-align: left;
+  color: #fff;
+  font-size: 1.6rem;
+  padding-top: 1rem;
+}
+
+#wifi-show-password::before {
+ content: '';
+ display: inline-block;
+ width: 3rem;
+ height: 3rem;
+ background-image: url('../images/checkbox-sprite.svg');
+ background-position: 0 0;
+ vertical-align: middle;
+ margin-right: 0.5rem;
+}
+
+#wifi-password-checkbox:checked + #wifi-show-password::before {
+  background-position: 0 9rem;
+}
+
+#wifi-connecting {
+  width: 54rem;
+  height: 10rem;
+  margin: 0 auto;
+  top: calc(50% - 15rem);
+  position: relative;
+  text-align: center;
+}
+
+#wifi-connecting p {
+  font-size: 1.7rem;
+  color: #fff;
+}

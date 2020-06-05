@@ -2,7 +2,7 @@
  * Krellian Kiosk web interface.
  */
 var Kiosk = {
-  
+
   /**
    * Start the kiosk web interface.
    */
@@ -11,29 +11,25 @@ var Kiosk = {
     this.urlBar = document.getElementById('url-bar');
     controls.addEventListener('submit', this.handleSubmit.bind(this));
   },
-  
+
   /**
    * Handle a submitted URL to be loaded by the kiosk.
    */
   handleSubmit: async function(e) {
     e.preventDefault();
     var url = this.urlBar.value;
-    const payload = {
-      'loadURL': {
-        'input': url
-      }
-    };
+    var payload = '"' + url + '"';
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
     const request = {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: payload,
       headers: headers
     };
-    
-    const response = await fetch('/actions/loadURL', request);
+
+    const response = await fetch('/actions/load_url', request);
     const json = await response.json();
   }
 }

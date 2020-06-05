@@ -18,14 +18,27 @@ It acts as both a web client (to render web content) and a web server (so that s
 
 To get started hacking on Krellian Kiosk first make sure that you have [Git](https://git-scm.com/), [NodeJS](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) installed.
 
-Then simply clone the Shell Kiosk repository from GitHub and run it.
+Clone the kiosk repository from GitHub:
 
 ```
 $ git clone https://github.com/krellian/kiosk.git
 $ cd kiosk
+```
+
+Install dependencies:
+```
+$ sudo apt-get install libdbus-1-dev
+$ sudo apt-get install libglib2.0-dev
+$ npm install -g node-gyp
 $ npm install
+```
+(commands may differ if you're not using a Debian-based Linux distribution)
+
+Start the application:
+```
 $ npm start
 ```
+
 The kiosk client should then start up full screen and the remote web interface should be running at http://localhost:8080
 
 The web client uses Electron and the web server uses NodeJS.

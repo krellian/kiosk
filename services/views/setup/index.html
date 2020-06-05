@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Krellian Kiosk Setup</title>
+    <link rel="icon" href="/images/icon.png" />
+    <link rel="stylesheet" href="css/setup.css" type="text/css" />
+    <script type="text/javascript" src="/js/lib/dompurify/purify.min.js"></script>
+    <script type="text/javascript" src="js/wifi-network-item.js"></script>
+    <script type="text/javascript" src="js/setup.js"></script>
+  </head>
+  <body>
+   <img id="wordmark" src="../images/wordmark.svg" />
+   
+   <section id="wifi-connect">
+     <h1>Choose a Wi-Fi network</h1>
+     <ul id="wifi-networks">
+     </ul>     
+   </section>
+   
+   <section id="wifi-password-prompt" class="hidden">
+     <a id="wifi-password-back" class="back-button" href="/setup"></a>
+     <h1>
+       <img src="images/wifi.svg" />
+       <span id="wifi-network-name"></span>
+     </h1>
+     <form id="wifi-password-form">
+       <input id="wifi-password-input" type="password" placeholder="Password" />
+       <input id="wifi-password-checkbox" type="checkbox" />
+       <label id="wifi-show-password" for="wifi-password-checkbox">
+          Show password
+       </label>
+       <input type="submit" value="Connect" />
+       <input id ="wifi-network-id" type="hidden" />
+       <input id="wifi-network-ssid" type="hidden" />
+     </form>
+   </section>
+   
+   <section id="wifi-connecting" class="hidden">
+     <h1>Connecting to Wi-Fi&#8230;</h1>
+     <p>Please ensure you are connected to the same network and then navigate to the address shown on the screen.</p>
+   </section>
+   
+  </body>
+</html>
