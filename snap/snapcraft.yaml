@@ -8,7 +8,7 @@ grade: devel
 
 architectures:
   - build-on: armhf
-  
+
 apps:
   krellian-kiosk:
     daemon: simple
@@ -21,6 +21,7 @@ apps:
     - browser-sandbox
     - network
     - network-bind
+    - network-manager
     - opengl
     - pulseaudio
     - wayland
@@ -48,7 +49,8 @@ parts:
         esac
         npm install
         npm install -g node-gyp
-        npm install electron-packager &&
+        npm install electron-packager
+        ./node_modules/.bin/electron-rebuild
         ELECTRON_GET_USE_PROXY=1 ./node_modules/.bin/electron-packager . --overwrite --platform=linux --arch=$ARCH --output=release-build --prune=true
         cp -v -R ./krellian-kiosk-linux-$ARCH $SNAPCRAFT_PART_INSTALL/krellian-kiosk
     stage-packages:
