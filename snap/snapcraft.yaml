@@ -37,6 +37,8 @@ plugs:
 parts:
   krellian-kiosk:
     plugin: nodejs
+    nodejs-package-manager: npm
+    nodejs-version: 12.18.2
     source: https://github.com/krellian/kiosk.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |
