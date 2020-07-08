@@ -25,12 +25,13 @@ $ git clone https://github.com/krellian/kiosk.git
 $ cd kiosk
 ```
 
-Install dependencies:
+Install dependencies and build for correct node version:
 ```
 $ sudo apt-get install libdbus-1-dev
 $ sudo apt-get install libglib2.0-dev
 $ npm install -g node-gyp
 $ npm install
+$ ./node_modules/.bin/electron-rebuild
 ```
 (commands may differ if you're not using a Debian-based Linux distribution)
 
