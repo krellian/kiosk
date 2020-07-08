@@ -40,14 +40,7 @@ parts:
     source: https://github.com/krellian/kiosk.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |
-        case $SNAPCRAFT_ARCH_TRIPLET in
-          "i386-linux-gnu") ARCH="ia32";;
-          "x86_64-linux-gnu") ARCH="x64";;
-          "arm-linux-gnueabihf") ARCH="armv7l";;
-          "aarch64-linux-gnu") ARCH="arm64";;
-          *) echo "ERROR: electron does not support the '$SNAPCRAFT_ARCH_TRIPLET' architecture" && exit 1;;
-        esac
-        npm install
+        ELECTRON_GET_USE_PROXY=1 npm install
         npm install -g node-gyp
         ./node_modules/.bin/electron-rebuild
         ELECTRON_GET_USE_PROXY=1 ./node_modules/.bin/electron-packager . --overwrite --platform=linux --arch=$ARCH --output=release-build --prune=true
