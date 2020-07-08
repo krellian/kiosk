@@ -42,10 +42,28 @@ parts:
     source: https://github.com/krellian/kiosk.git
     after: [desktop-gtk3, xwayland-kiosk-helper]
     override-build: |
-        ELECTRON_GET_USE_PROXY=1 npm install
+        # Tell snapcraft nodejs plugin where to find installed node version
+        PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
+
+        # Set npm permissions to allow global dependencies
+        npm config set unsafe-perm True
+
+        # Force use of proxy to work around build.snapcraft.io networking issues
+        if [ -n "$http_proxy" ]; then
+          export ELECTRON_GET_USE_PROXY=1
+          export GLOBAL_AGENT_HTTP_PROXY="${http_proxy}"
+          export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"
+        fi
+
+        # Install dependencies
+        npm install
         npm install -g node-gyp
+
+        # Re-build d-bus package for Electron's node version
         ./node_modules/.bin/electron-rebuild
-        ELECTRON_GET_USE_PROXY=1 ./node_modules/.bin/electron-packager . --overwrite --platform=linux --arch=$ARCH --output=release-build --prune=true
+
+        # Package Electron application
+        ./node_modules/.bin/electron-packager . --overwrite --platform=linux --arch=$ARCH --output=release-build --prune=true
         cp -v -R ./krellian-kiosk-linux-$ARCH $SNAPCRAFT_PART_INSTALL/krellian-kiosk
     stage-packages:
     - libasound2
@@ -55,8 +73,6 @@ parts:
     - libxss1
     - libxtst6
     build-packages:
-    - nodejs
-    - npm
     - unzip
 
   # Adapted from snapcraft-desktop-helpers https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml#L183
