@@ -14,25 +14,17 @@ apps:
     daemon: simple
     restart-condition: always
     command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk"  "--no-sandbox"
-    environment:
-      XWAYLAND_FULLSCREEN_WINDOW_HINT: window_role="browser-window"
-    slots: [ x11 ]
     plugs:
-    - browser-sandbox
+    - browser-support
     - network
     - network-bind
     - network-manager
     - opengl
     - pulseaudio
     - wayland
-    - x11-plug
 
-plugs:
-  browser-sandbox:
-    interface: browser-support
-    allow-sandbox: true
-  x11-plug: # because cannot have identical plug/slot name in same yaml.
-    interface: x11
+environment:
+  XWAYLAND_FULLSCREEN_WINDOW_HINT: window_role="browser-window"
 
 parts:
   krellian-kiosk:
