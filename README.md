@@ -55,9 +55,10 @@ To install a pre-release snap package of Krellian Kiosk on Ubuntu Core (currentl
 $ scp krellian-kiosk_0.1_armhf.snap joebloggs@192.168.1.123:~/
 ```
 
-- SSH into the Raspberry Pi and install the network-manager snap
+- SSH into the Raspberry Pi and install the network-manager and mir-kiosk snaps
 
 ```
+$ snap install mir-kiosk
 $ snap install network-manager
 ```
 
