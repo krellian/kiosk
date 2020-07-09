@@ -46,23 +46,32 @@ The web client uses Electron and the web server uses NodeJS.
 
 ## Install on Ubuntu Core
 
-To install a pre-release snap package of Krellian Kiosk on Ubuntu Core (currently only supported on Raspberry Pi, with Raspberry Pi 3 recommended):
-- Follow the [https://ubuntu.com/download/raspberry-pi-core](instructions) to download, flash and configure Ubuntu Core on a Raspberry Pi (and connect a display to the Pi)
-- Download the [https://build.snapcraft.io/user/krellian/kiosk/](latest developer build) by clicking a build, copying and pasting the URL from the first line in the build log and downloading the krellian-kiosk_0.1_armhf.snap file to your desktop computer
+To install a pre-release snap package of Krellian Kiosk on Ubuntu Core (currently only supported on Raspberry Pi, Raspberry Pi 3 recommended):
+- Follow the [instructions](https://ubuntu.com/download/raspberry-pi-core) to download, flash and configure Ubuntu Core on a Raspberry Pi (and connect a display to the Pi)
+- Download the [latest developer build](https://build.snapcraft.io/user/krellian/kiosk/) by clicking on a build, copying and pasting the URL from the first line in the build log and downloading the krellian-kiosk_0.1_armhf.snap file to your desktop computer
 - Copy the snap package to the Raspberry Pi e.g.
 
 ```
 $ scp krellian-kiosk_0.1_armhf.snap joebloggs@192.168.1.123:~/
 ```
 
-- Install the snap package and its dependencies and connect the network management interface
+- SSH into the Raspberry Pi and install the network-manager snap
 
 ```
 $ snap install network-manager
+```
+
+(May need to hard reboot the Pi for the network manager to reconfigure the network and then SSH back in)
+
+- Install the krellian-kiosk snap and connect the network-manager interface
+
+```
 $ snap install --dangerous ./krellian-kiosk_0.1_armhf.snap
 $ snap connect krellian-kiosk:network-manager network-manager:service
 $ snap restart krellian-kiosk
 ```
+
+The kiosk client should then start up full screen and the remote web interface should be running at http://localhost:8080
 
 ## Copyrights, Trademarks and Licensing
 

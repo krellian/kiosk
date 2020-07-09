@@ -13,18 +13,18 @@ apps:
   krellian-kiosk:
     daemon: simple
     restart-condition: always
-    command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk"  "--no-sandbox"
-    plugs:
-    - browser-support
-    - network
-    - network-bind
-    - network-manager
-    - opengl
-    - pulseaudio
-    - wayland
+    command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk" "--no-sandbox"
 
 environment:
   XWAYLAND_FULLSCREEN_WINDOW_HINT: window_role="browser-window"
+
+plugs:
+  browser-support:
+  network:
+  network-bind:
+  opengl:
+  pulseaudio:
+  wayland:
 
 parts:
   krellian-kiosk:
