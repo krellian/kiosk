@@ -72,7 +72,7 @@ $ snap connect krellian-kiosk:network-manager network-manager:service
 $ snap restart krellian-kiosk
 ```
 
-The kiosk client should then start up full screen and the remote web interface should be running at http://localhost:8080
+The kiosk client should then start up full screen and the remote web interface should be running at http://192.168.1.123:8080 (with the IP address of the Raspberry Pi on your network)
 
 ## Copyrights, Trademarks and Licensing
 
