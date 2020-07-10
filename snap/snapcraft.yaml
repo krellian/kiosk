@@ -15,12 +15,12 @@ apps:
     restart-condition: always
     command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk" "--no-sandbox"
     plugs:
+    - audio-playback
     - browser-support
     - network
     - network-bind
     - network-manager
     - opengl
-    - pulseaudio
     - wayland
 
 environment:
