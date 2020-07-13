@@ -15,7 +15,6 @@ apps:
     restart-condition: always
     command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk" "--no-sandbox"
     plugs:
-    - alsa
     - audio-playback
     - browser-support
     - network
@@ -27,10 +26,6 @@ apps:
 
 environment:
   XWAYLAND_FULLSCREEN_WINDOW_HINT: window_role="browser-window"
-
-layout:
-  /usr/share/alsa:
-    bind: $SNAP/usr/share/alsa
 
 parts:
   krellian-kiosk:
