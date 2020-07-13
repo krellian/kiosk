@@ -16,11 +16,13 @@ apps:
     command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk" "--no-sandbox"
     plugs:
     - alsa
+    - audio-playback
     - browser-support
     - network
     - network-bind
     - network-manager
     - opengl
+    - pulseaudio
     - wayland
 
 environment:
