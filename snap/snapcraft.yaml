@@ -44,13 +44,13 @@ parts:
           *) echo "ERROR: electron does not support the '$SNAPCRAFT_ARCH_TRIPLET' architecture" && exit 1;;
         esac
 
-        # Tell snapcraft nodejs plugin where to find installed node version
+        # Tell snapcraft nodejs plugin where to find installed node version due to https://bugs.launchpad.net/snapcraft/+bug/1886858
         PATH=$PATH:$SNAPCRAFT_PART_SRC/../npm/bin
 
         # Set npm permissions to allow global dependencies
         npm config set unsafe-perm True
 
-        # Force use of proxy to work around build.snapcraft.io networking issues
+        # Force use of proxy to work around build.snapcraft.io networking issues due to https://bugs.launchpad.net/snapcraft/+bug/1886861
         if [ -n "$http_proxy" ]; then
           export ELECTRON_GET_USE_PROXY=1
           export GLOBAL_AGENT_HTTP_PROXY="${http_proxy}"
