@@ -15,7 +15,7 @@ apps:
     restart-condition: always
     command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk" "--no-sandbox"
     plugs:
-    - audio-playback
+    - alsa
     - browser-support
     - network
     - network-bind
