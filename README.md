@@ -47,22 +47,24 @@ The web client uses Electron and the web server uses NodeJS.
 ## Install on Ubuntu Core
 
 To install a pre-release snap package of Krellian Kiosk on Ubuntu Core (currently only supported on Raspberry Pi, Raspberry Pi 3 recommended):
-- Follow the [instructions](https://ubuntu.com/download/raspberry-pi-core) to download, flash and configure Ubuntu Core on a Raspberry Pi (and connect a display to the Pi)
+- Follow the [instructions](https://ubuntu.com/download/raspberry-pi-core) to download, flash and configure Ubuntu Core on a Raspberry Pi and connect a display to the Pi
 - Download the [latest developer build](https://build.snapcraft.io/user/krellian/kiosk/) by clicking on a build, copying and pasting the URL from the first line in the build log and downloading the krellian-kiosk_0.1_armhf.snap file to your desktop computer
-- Copy the snap package to the Raspberry Pi e.g.
+- Copy the snap package to the Raspberry Pi then SSH into it, using the IP address displayed on the screen and the username you assigned to your Ubuntu SSO account e.g.
 
 ```
 $ scp krellian-kiosk_0.1_armhf.snap joebloggs@192.168.1.123:~/
+$ ssh joebloggs@192.168.1.123
 ```
 
-- SSH into the Raspberry Pi and install the network-manager and mir-kiosk snaps
+- Install the mir-kiosk, pulseaudio and network-manager snaps (Note: You might be interrupted at this point by snapd rebooting the system one or more times to apply system updates)
 
 ```
 $ snap install mir-kiosk
+$ snap install pulseaudio
 $ snap install network-manager
 ```
 
-(May need to hard reboot the Pi for the network manager to reconfigure the network and then SSH back in)
+(Note: network-manager may drop the network connection after installation, at which point you'll need to hard reboot the Pi and find its new IP address in order to SSH in again)
 
 - Install the krellian-kiosk snap and connect the network-manager interface
 
@@ -72,7 +74,7 @@ $ snap connect krellian-kiosk:network-manager network-manager:service
 $ snap restart krellian-kiosk
 ```
 
-The kiosk client should then start up full screen and the remote web interface should be running at http://192.168.1.123:8080 (with the IP address of the Raspberry Pi on your network)
+The kiosk client should then start up full screen and the remote web interface should be running at http://{ip}:8080 (Where {ip} is the IP address of the Raspberry Pi on your network)
 
 ## Copyrights, Trademarks and Licensing
 
