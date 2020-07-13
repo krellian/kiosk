@@ -75,6 +75,7 @@ parts:
     stage-packages:
     - libasound2
     - libgconf-2-4
+    - libpulse0
     - libnss3
     - libx11-xcb1
     - libxss1
