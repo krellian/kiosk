@@ -74,7 +74,23 @@ $ snap connect krellian-kiosk:network-manager network-manager:service
 $ snap restart krellian-kiosk
 ```
 
-The kiosk client should then start up full screen and the remote web interface should be running at http://{ip}:8080 (Where {ip} is the IP address of the Raspberry Pi on your network)
+The kiosk client should then start up full screen and the remote web interface should be running on port 80 of the Raspberry Pi's IP address, e.g. http://192.168.1.123
+
+## Command Line Arguments
+
+The Krellian Kiosk application accepts command line arguments as follows:
+
+```
+-p        HTTP port for system services (default 8080)
+```
+
+e.g.
+
+```
+$ ./node_modules/electron/dist/electron . -p 8000
+```
+
+Note: The snap package binds to port 80 rather than 8080 by default.
 
 ## Copyrights, Trademarks and Licensing
 

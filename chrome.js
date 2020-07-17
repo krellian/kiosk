@@ -20,7 +20,10 @@ var Chrome = {
       fullscreen: true,
       webPreferences: {
         nodeIntegration: true,
-        webviewTag: true
+        webviewTag: true,
+        //TODO: Replace once deprecated in Electron 12
+        // https://github.com/electron/electron/issues/21408
+        enableRemoteModule: true
       }
     });
 
