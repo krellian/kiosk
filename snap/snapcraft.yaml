@@ -13,7 +13,7 @@ apps:
   krellian-kiosk:
     daemon: simple
     restart-condition: always
-    command: desktop-launch xwayland-kiosk-launch "$SNAP/krellian-kiosk/krellian-kiosk" "--no-sandbox"
+    command: desktop-launch xwayland-kiosk-launch $SNAP/krellian-kiosk/krellian-kiosk --no-sandbox -p 80
     plugs:
     - audio-playback
     - browser-support
