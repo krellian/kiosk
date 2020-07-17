@@ -5,15 +5,16 @@ const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 
 /**
- * Top level chrome module which creates the main Electron BrowserWindow and 
+ * Top level chrome module which creates the main Electron BrowserWindow and
  * loads the system chrome inside it.
  */
 var Chrome = {
-  
+
   /**
    * Create main window and load shell as system chrome.
    */
   start: function() {
+    console.log('Starting system chrome...');
     // Create the main window
     this.mainWindow = new BrowserWindow({
       fullscreen: true,
@@ -22,7 +23,7 @@ var Chrome = {
         webviewTag: true
       }
     });
-    
+
     // Workaround for https://github.com/electron/electron/issues/21259
     Menu.setApplicationMenu(null);
 
@@ -32,11 +33,11 @@ var Chrome = {
       protocol: 'file:',
       slashes: true
     }));
-    
+
     // Uncomment the following line to open DevTools
     //this.mainWindow.webContents.openDevTools();
   },
-  
+
   /**
    * Send a message to the system chrome over IPC.
    *

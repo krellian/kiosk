@@ -12,9 +12,10 @@ const networkManager = require('../models/network-manager');
  */
 router.get('/wifi_access_points', function(request, response) {
   networkManager.scanWifiAccessPoints().then((accessPoints) => {
-    response.json(accessPoints);  
+    response.json(accessPoints);
   }).catch((error) => {
-    response.status(500).send(error);
+    console.error('Failed to scan for Wi-Fi access points: ' + error);
+    response.status(500).send('Failed to scan for Wi-Fi access points');
   });
 
 });
