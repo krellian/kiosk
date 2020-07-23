@@ -12,13 +12,23 @@
   </head>
   <body>
    <img id="wordmark" src="../images/wordmark.svg" />
-   
-   <section id="wifi-connect">
+
+   <section id="screen-password" class="hidden">
+     <h1>Give your screen a password</h1>
+     <form id="screen-password-form">
+       <input id="screen-password-input" type="password" required placeholder="Password" />
+       <input id="screen-password-confirm" type="password" required placeholder="Confirm password" />
+       <input type="submit" value="Next &#187;" />
+     </form>
+   </section>
+
+   <section id="wifi-connect" class="hidden">
+     <a id="wifi-connect-back" class="back-button" href="/setup"></a>
      <h1>Choose a Wi-Fi network</h1>
      <ul id="wifi-networks">
-     </ul>     
+     </ul>
    </section>
-   
+
    <section id="wifi-password-prompt" class="hidden">
      <a id="wifi-password-back" class="back-button" href="/setup"></a>
      <h1>
@@ -36,11 +46,11 @@
        <input id="wifi-network-ssid" type="hidden" />
      </form>
    </section>
-   
+
    <section id="wifi-connecting" class="hidden">
      <h1>Connecting to Wi-Fi&#8230;</h1>
      <p>Please ensure you are connected to the same network and then navigate to the address shown on the screen.</p>
    </section>
-   
+
   </body>
 </html>
