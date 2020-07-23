@@ -1,5 +1,6 @@
 const express = require('express');
 const router = require('./services/router');
+const database = require('./services/database');
 const networkManager = require('./services/models/network-manager');
 
 /**
@@ -14,6 +15,9 @@ var Services = {
    * @param {integer} port HTTP port.
    */
   start: function(port) {
+    // Start database;
+    database.start();
+
     // Start network manager
     networkManager.start();
 
@@ -21,7 +25,7 @@ var Services = {
     this.server = express();
     this.server.use(router);
     this.server.listen(port, () =>
-      console.log(`Starting system services on port ${port}...`));
+      console.log(`Starting HTTP server on port ${port}...`));
   }
 }
 

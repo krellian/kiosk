@@ -28,6 +28,13 @@ body {
   display: none;
 }
 
+h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
 input[type=text], input[type=password] {
   border-radius: 0.5rem;
   border: none;
@@ -74,15 +81,31 @@ button:hover, input[type=submit]:hover {
   height: 3rem;
 }
 
-#wifi-connect {
-  padding: 2rem;
+
+#screen-password, #wifi-password-prompt {
+  width: 50rem;
+  margin: 0 auto;
+  top: calc(50% - 18rem);
+  position: relative;
+  text-align: center;
 }
 
-#wifi-connect h1 {
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: #fff;
+#screen-password {
   text-align: center;
+}
+
+
+#screen-password-form, #wifi-password-form {
+  width: 27rem;
+  margin: 0 auto;
+}
+
+#screen-password-form input[type=password] {
+  margin-bottom: 1rem;
+}
+
+#wifi-connect {
+  padding: 2rem;
 }
 
 #wifi-networks {
@@ -163,17 +186,10 @@ button:hover, input[type=submit]:hover {
 }
 
 #wifi-password-prompt {
-  width: 50rem;
   height: 15rem;
-  margin: 0 auto;
-  top: calc(50% - 18rem);
-  position: relative;
-  text-align: center;
 }
 
-#wifi-password-prompt h1, #wifi-connecting h1 {
-  font-size: 2.2rem;
-  color: #fff;
+#wifi-password-prompt h1 {
   font-weight: normal;
 }
 
@@ -188,11 +204,6 @@ button:hover, input[type=submit]:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 46rem;
-}
-
-#wifi-password-prompt form {
-  width: 27rem;
-  margin: 0 auto;
 }
 
 #wifi-password-checkbox {

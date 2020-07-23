@@ -8,7 +8,7 @@ class WifiNetworkItem {
     this.strength = data.strength;
     this.secure = data.secure;
   }
-  
+
   /**
    * Render HTML.
    */
@@ -24,7 +24,7 @@ class WifiNetworkItem {
       security = 'insecure';
     }
     var icon = security + '-' + strength;
-    
+
     return `<li id="wifi-network-${id}" class="wifi-network-item">
       <span class="wifi-network-ssid">${ssid}</span>
       <span class="wifi-network-security ${icon}" />
