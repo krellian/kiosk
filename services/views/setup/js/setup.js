@@ -1,11 +1,15 @@
 /**
  * Krellian Kiosk First Time Setup UI.
  */
+
+'use strict';
+
 var Setup = {
 
   WIFI_ACCESS_POINTS_PATH: '/properties/wifi_access_points',
   CONNECT_TO_WIFI_NETWORK_PATH: '/actions/connect_to_wifi_network',
-  SET_PASSWORD_PATH: '/settings/password',
+  NAME_PATH: '/settings/name',
+  PASSWORD_PATH: '/settings/password',
   wifiAccessPoints: [], // Known Wi-Fi access points
 
   /**
@@ -13,7 +17,11 @@ var Setup = {
    */
   start: function() {
     // Elements
+    this.screenNameSection = document.getElementById('screen-name');
+    this.screenNameForm = document.getElementById('screen-name-form');
+    this.screenNameInput = document.getElementById('screen-name-input');
     this.screenPasswordSection = document.getElementById('screen-password');
+    this.screenPasswordBack = document.getElementById('screen-password-back');
     this.screenPasswordForm = document.getElementById('screen-password-form');
     this.screenPasswordInput = document.getElementById('screen-password-input');
     this.screenPasswordConfirm =
@@ -33,20 +41,92 @@ var Setup = {
     this.wifiNetworkSsid = document.getElementById('wifi-network-ssid');
     this.wifiConnectingSection = document.getElementById('wifi-connecting');
 
-    this.showScreenPasswordSection();
-  },
-
-  /**
-   * Show the section for setting the screen password.
-   */
-  showScreenPasswordSection: function() {
+    // Add event listeners
+    this.screenNameForm.addEventListener('submit',
+      this.handleScreenNameSubmit.bind(this));
     this.screenPasswordInput.addEventListener('input',
       this.handleScreenPasswordInput.bind(this));
     this.screenPasswordConfirm.addEventListener('input',
       this.handleScreenPasswordInput.bind(this));
     this.screenPasswordForm.addEventListener('submit',
       this.handleScreenPasswordSubmit.bind(this));
+    this.screenPasswordBack.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.hideScreenPasswordSection();
+      this.showScreenNameSection();
+    });
+    this.wifiNetworkList.addEventListener('click',
+      this.handleWifiConnect.bind(this));
+    this.wifiConnectBack.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.hideWifiConnectSection();
+      this.showScreenPasswordSection();
+    });
+    this.wifiPasswordCheckbox.addEventListener('change',
+      this.toggleWifiPasswordInput.bind(this));
+    this.wifiPasswordForm.addEventListener('submit',
+      this.handleWifiPasswordSubmit.bind(this));
+    this.wifiPasswordBack.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.hideWifiPasswordPrompt();
+        this.showWifiConnectSection();
+    });
+
+    // Show the first setup section
+    this.showScreenNameSection();
+  },
+
+  /**
+   * Show the section for setting the screen name.
+   */
+  showScreenNameSection: function() {
+    this.screenNameSection.classList.remove('hidden');
+    this.screenNameInput.focus();
+  },
+
+  /**
+   * Handle submission of the screen name form.
+   *
+   * @param {Event} e submit event.
+   */
+  handleScreenNameSubmit: function(e) {
+    e.preventDefault();
+    var name = this.screenNameInput.value;
+    var payload = '"' + name + '"';
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+    const request = {
+      method: 'PUT',
+      body: payload,
+      headers: headers
+    };
+    fetch(this.NAME_PATH, request).then((response) => {
+      if (!response.ok) {
+        console.error('Failed to set screen name');
+      } else {
+        this.screenNameSection.classList.add('hidden');
+        this.showScreenPasswordSection();
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  },
+
+  /**
+   * Hide the screen name section.
+   */
+  hideScreenNameSection: function() {
+    this.screenNameSection.classList.add('hidden');
+  },
+
+  /**
+   * Show the section for setting the screen password.
+   */
+  showScreenPasswordSection: function() {
     this.screenPasswordSection.classList.remove('hidden');
+    this.screenPasswordInput.focus();
   },
 
   /**
@@ -87,7 +167,7 @@ var Setup = {
       body: payload,
       headers: headers
     };
-    fetch(this.SET_PASSWORD_PATH, request).then((response) => {
+    fetch(this.PASSWORD_PATH, request).then((response) => {
       if (!response.ok) {
         console.error('Failed to set password');
       } else {
@@ -97,7 +177,6 @@ var Setup = {
     }).catch((error) => {
       console.error(error);
     });
-
   },
 
   /**
@@ -105,26 +184,12 @@ var Setup = {
    */
   hideScreenPasswordSection: function() {
     this.screenPasswordSection.classList.add('hidden');
-    this.screenPasswordInput.removeEventListener('input',
-      this.handleScreenPasswordInput.bind(this));
-    this.screenPasswordConfirm.removeEventListener('input',
-      this.handleScreenPasswordInput.bind(this));
-    this.screenPasswordForm.removeEventListener('submit',
-      this.handleScreenPasswordSubmit.bind(this));
   },
 
   /**
    * Show a list of available Wi-Fi networks.
    */
   showWifiConnectSection: function() {
-    // Add event listeners
-    this.wifiConnectBack.addEventListener('click', (e) => {
-      e.preventDefault();
-      this.hideWifiConnectSection();
-      this.showScreenPasswordSection();
-    })
-    this.wifiNetworkList.addEventListener('click',
-      this.handleWifiConnect.bind(this));
     // Show empty list
     this.wifiConnectSection.classList.remove('hidden');
     // Fetch list of Wi-fi access points
@@ -211,12 +276,9 @@ var Setup = {
    * Hide the Wi-fi network list.
    */
   hideWifiConnectSection: function() {
-    this.wifiConnectSection.classList.add('hidden');
     // Reset list
     this.wifiNetworkList.innerHTML = '';
-    // Remove event listeners
-    this.wifiNetworkList.removeEventListener('click',
-      this.handleWifiConnect.bind(this));
+    this.wifiConnectSection.classList.add('hidden');
   },
 
   /**
@@ -226,16 +288,6 @@ var Setup = {
    * @param {String} ssid The SSID of the access point to connect to.
    */
   showWifiPasswordSection: function(id, ssid) {
-    // Add event listeners
-    this.wifiPasswordCheckbox.addEventListener('change',
-      this.toggleWifiPasswordInput.bind(this));
-    this.wifiPasswordBack.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.hideWifiPasswordPrompt();
-        this.showWifiConnectSection();
-    });
-    this.wifiPasswordForm.addEventListener('submit',
-      this.handleWifiPasswordSubmit.bind(this));
     // Set visible SSID
     this.wifiNetworkName.textContent = ssid;
     // Set hidden form fields
@@ -243,6 +295,7 @@ var Setup = {
     this.wifiNetworkSsid.value = ssid;
     // Show password prompt
     this.wifiPasswordPromptSection.classList.remove('hidden');
+    this.wifiPasswordInput.focus();
   },
 
   /**
@@ -258,12 +311,6 @@ var Setup = {
     this.wifiNetworkSsid.value = '';
     this.wifiPasswordCheckbox.checked = false;
     this.toggleWifiPasswordInput();
-
-    // Remove event listeners
-    this.wifiPasswordCheckbox.removeEventListener('change',
-      this.toggleWifiPasswordInput.bind(this));
-    this.wifiPasswordForm.removeEventListener('submit',
-      this.handleWifiPasswordSubmit.bind(this));
   },
 
   /**

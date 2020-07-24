@@ -3,6 +3,9 @@
  *
  * Serves requests to /properties
  */
+
+'use strict';
+
 const express = require('express');
 const router = express.Router();
 const networkManager = require('../models/network-manager');

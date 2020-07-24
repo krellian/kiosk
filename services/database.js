@@ -1,3 +1,5 @@
+'use strict';
+
 const level = require('level');
 
 /**
