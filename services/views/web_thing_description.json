@@ -5,45 +5,11 @@
     "none": { "scheme": "nosec"}
   },
   "security": ["none"],
-  "properties" : {
-    "wifiAccessPoints": {
-      "title": "Wi-Fi Access Points",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-          "ssid": { "type": "string" },
-          "strength": {
-            "type": "number",
-            "unit": "percent",
-            "minimum": 0,
-            "maximum": 100
-          },
-          "secure": { "type": "boolean" }
-        }
-      },
-      "forms": [{"href": "/properties/wifi_access_points"}]
-    }
-  },
   "actions": {
     "loadURL": {
       "title": "Load URL",
       "input": {"type": "string"},
       "forms": [{"href": "/actions/load_url"}]
-    },
-    "connectToWiFiNetwork": {
-      "title": "Connect to Wi-Fi network",
-      "input": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-          "ssid": { "type": "string" },
-          "secure": { "type": "boolean" },
-          "password": { "type": "string" }
-        }
-      },
-      "forms": [{"href": "/actions/connect_to_wifi_network"}]
     }
   },
   "links": [
