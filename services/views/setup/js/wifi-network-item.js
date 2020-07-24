@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * WifiNetworkItem represents a Wi-Fi Access Point that can be connected to.
  */

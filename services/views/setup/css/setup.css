@@ -82,7 +82,7 @@ button:hover, input[type=submit]:hover {
 }
 
 
-#screen-password, #wifi-password-prompt {
+#screen-name, #screen-password, #wifi-password-prompt {
   width: 50rem;
   margin: 0 auto;
   top: calc(50% - 18rem);
@@ -95,13 +95,22 @@ button:hover, input[type=submit]:hover {
 }
 
 
-#screen-password-form, #wifi-password-form {
+#screen-name-form, #screen-password-form, #wifi-password-form {
   width: 27rem;
   margin: 0 auto;
 }
 
 #screen-password-form input[type=password] {
   margin-bottom: 1rem;
+}
+
+#screen-name-label {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: left;
 }
 
 #wifi-connect {

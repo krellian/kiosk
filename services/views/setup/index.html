@@ -1,19 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Krellian Kiosk Setup</title>
     <link rel="icon" href="/images/icon.png" />
     <link rel="stylesheet" href="css/setup.css" type="text/css" />
-    <script type="text/javascript" src="/js/lib/dompurify/purify.min.js"></script>
-    <script type="text/javascript" src="js/wifi-network-item.js"></script>
-    <script type="text/javascript" src="js/setup.js"></script>
+    <script src="/js/lib/dompurify/purify.min.js"></script>
+    <script src="js/wifi-network-item.js"></script>
+    <script src="js/setup.js"></script>
   </head>
   <body>
-   <img id="wordmark" src="../images/wordmark.svg" />
+   <img id="wordmark" src="../images/wordmark.svg" alt="Krellian Kiosk" />
+
+   <section id="screen-name" class="hidden">
+     <h1>Give your screen a name</h1>
+     <form id="screen-name-form">
+       <input id="screen-name-input" type="text" required placeholder="Name" />
+       <label id="screen-name-label" for="screen-name-input">
+          E.g. Lobby Screen
+       </label>
+       <input type="submit" value="Next &#187;" />
+     </form>
+   </section>
 
    <section id="screen-password" class="hidden">
+     <a id="screen-password-back" class="back-button" href="/setup"></a>
      <h1>Give your screen a password</h1>
      <form id="screen-password-form">
        <input id="screen-password-input" type="password" required placeholder="Password" />
@@ -32,7 +44,7 @@
    <section id="wifi-password-prompt" class="hidden">
      <a id="wifi-password-back" class="back-button" href="/setup"></a>
      <h1>
-       <img src="images/wifi.svg" />
+       <img src="images/wifi.svg" alt="Wi-Fi icon"/>
        <span id="wifi-network-name"></span>
      </h1>
      <form id="wifi-password-form">

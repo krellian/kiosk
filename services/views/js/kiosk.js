@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Krellian Kiosk web interface.
  */
