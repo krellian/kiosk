@@ -6,10 +6,10 @@
 
 var Setup = {
 
-  WIFI_ACCESS_POINTS_PATH: '/properties/wifi_access_points',
-  CONNECT_TO_WIFI_NETWORK_PATH: '/actions/connect_to_wifi_network',
   NAME_PATH: '/settings/name',
   PASSWORD_PATH: '/settings/password',
+  WIFI_ACCESS_POINTS_PATH: '/settings/network/wifi_access_points',
+  WIFI_CONNECTIONS_PATH: '/settings/network/wifi_connections',
   wifiAccessPoints: [], // Known Wi-Fi access points
 
   /**
@@ -374,7 +374,7 @@ var Setup = {
         body: JSON.stringify(payload),
         headers: headers
       };
-      fetch(this.CONNECT_TO_WIFI_NETWORK_PATH, request).then((response) => {
+      fetch(this.WIFI_CONNECTIONS_PATH, request).then((response) => {
         resolve();
       }).catch((error) => {
         console.error(error);
