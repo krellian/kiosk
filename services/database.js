@@ -12,14 +12,18 @@ const Database = {
    * Start the database.
    */
   start: function() {
-    console.log('Starting database...');
-    // Create or open database
-    level('kiosk', (error, db) => {
-      if (error) {
-        console.error('Error starting database: ' + error);
-      } else {
-        this.db = db;
-      }
+    return new Promise((resolve, reject) => {
+      console.log('Starting database...');
+      // Create or open database
+      level('db', (error, db) => {
+        if (error) {
+          console.error('Error starting database: ' + error);
+          reject(error);
+        } else {
+          this.db = db;
+          resolve();
+        }
+      });
     });
   },
 
@@ -32,6 +36,16 @@ const Database = {
    */
   write: async function(key, value) {
     return this.db.put(key, value);
+  },
+
+  /**
+   * Read a value.
+   *
+   * @param {Object} key.
+   * @return {Promise} Resolves with value.
+   */
+  read: async function(key) {
+    return this.db.get(key);
   },
 }
 

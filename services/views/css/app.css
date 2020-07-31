@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/opensans-regular.woff") format("woff");
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-style: normal;
+  src: url("/fonts/opensans-semibold.woff") format("woff");
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  font-family: "Open Sans", sans-serif;
+}
+
+input[type=text], input[type=password] {
+  border-radius: 0.5rem;
+  border: none;
+  height: 3.2rem;
+  font-size: 1.6rem;
+  padding: 0.75rem;
+  box-sizing: border-box;
+}
+
+button, input[type=submit] {
+  background-color: #648d32;
+  height: 3.2rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.7rem;
+  color: #fff;
+  margin: 1rem;
+  padding: 0 2rem;
+}
+
+button:hover, input[type=submit]:hover {
+  background-color: #90bc5c;
+}
+
+#wordmark {
+  display: block;
+  height: 3rem;
+  margin: 3rem auto;
+}

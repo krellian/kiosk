@@ -17,7 +17,7 @@ router.post('/load_url', function(request, response) {
   if (request.body) {
     var url = request.body;
     userAgent.loadURL(url);
-    response.status(201).send(url);
+    response.status(201).json(url);
   } else {
     response.status(400).send();
   }

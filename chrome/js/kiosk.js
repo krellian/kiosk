@@ -3,7 +3,7 @@ const ipcRenderer = electron.ipcRenderer;
 const parseArgs = require('minimist');
 const DEFAULT_HOST = 'http://localhost';
 const DEFAULT_PORT = '8080';
-const DEFAULT_PAGE = '/placeholder.html';
+const DEFAULT_PAGE = '/display';
 
 /**
  * System chrome loaded inside the top level window.
