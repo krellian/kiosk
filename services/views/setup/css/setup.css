@@ -1,25 +1,3 @@
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: 400;
-  font-style: normal;
-  src: url("/fonts/opensans-regular.woff") format("woff");
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: 600;
-  font-style: normal;
-  src: url("/fonts/opensans-semibold.woff") format("woff");
-}
-
-html, body {
-	width: 100%;
-  height: 100%;
-	margin: 0;
-	padding: 0;
-	font-size: 10px;
-  font-family: "Open Sans", sans-serif;
-}
-
 body {
   background-color: #333333;
 }
@@ -33,29 +11,6 @@ h1 {
   font-weight: 600;
   color: #fff;
   text-align: center;
-}
-
-input[type=text], input[type=password] {
-  border-radius: 0.5rem;
-  border: none;
-  height: 3.2rem;
-  font-size: 1.6rem;
-  padding: 0.75rem;
-  box-sizing: border-box;
-}
-
-button, input[type=submit] {
-  background-color: #648d32;
-  height: 3.2rem;
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 1.7rem;
-  color: #fff;
-  margin: 1rem;
-}
-
-button:hover, input[type=submit]:hover {
-  background-color: #90bc5c;
 }
 
 .back-button {
@@ -93,7 +48,6 @@ button:hover, input[type=submit]:hover {
 #screen-password {
   text-align: center;
 }
-
 
 #screen-name-form, #screen-password-form, #wifi-password-form {
   width: 27rem;

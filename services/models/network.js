@@ -1,10 +1,10 @@
 const DBus = require('dbus');
 
 /**
- * NetworkManager is responsible for configuring network interfaces
+ * Network Manager is responsible for configuring network interfaces
  * using NetworkManager via DBus.
  */
-const NetworkManager = {
+const Network = {
 
   systemBus: null, // Connection to system bus (dBus)
   wifiAdapter: null, // Primary Wi-Fi adapter (object path)
@@ -390,7 +390,6 @@ const NetworkManager = {
           if (error) {
             reject(error);
           }
-          console.log('Success: ' + value);
           resolve(value);
         });
 
@@ -400,4 +399,4 @@ const NetworkManager = {
 
 }
 
-module.exports = NetworkManager;
+module.exports = Network;

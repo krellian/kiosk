@@ -1,8 +1,8 @@
+'use strict';
+
 /**
  * Krellian Kiosk First Time Setup UI.
  */
-
-'use strict';
 
 var Setup = {
 
@@ -10,7 +10,9 @@ var Setup = {
   PASSWORD_PATH: '/settings/password',
   WIFI_ACCESS_POINTS_PATH: '/settings/network/wifi_access_points',
   WIFI_CONNECTIONS_PATH: '/settings/network/wifi_connections',
+  PASSWORD_IS_SET_PATH: '/settings/password_is_set',
   wifiAccessPoints: [], // Known Wi-Fi access points
+  jwt: localStorage.getItem('jwt'), // Authentication token
 
   /**
    * Start the first time setup UI.
@@ -72,8 +74,41 @@ var Setup = {
         this.showWifiConnectSection();
     });
 
-    // Show the first setup section
-    this.showScreenNameSection();
+    // Show the first setup section if password not needed
+    this.checkForPassword().then(() => this.showScreenNameSection());
+  },
+
+  /**
+   * Check whether password is needed.
+   *
+   * If password set on server but no token on client then redirect to login.
+   *
+   * @returns {Promise} Rejects and redirects to login if password needed.
+   */
+  checkForPassword: function() {
+    return new Promise((resolve, reject) => {
+      var request = {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+      };
+      fetch(this.PASSWORD_IS_SET_PATH, request).then((response) => {
+        response.json().then(value => {
+          if(value == true) {
+            // If no authentication token found, redirect to login page
+            if (!this.jwt) {
+              window.location.href = '/login';
+              reject();
+            } else {
+              resolve();
+            }
+          } else {
+            resolve();
+          }
+        })
+      }).catch((error) => {
+        console.error('Failed to get password status.');
+      });
+    });
   },
 
   /**
@@ -92,8 +127,9 @@ var Setup = {
   handleScreenNameSubmit: function(e) {
     e.preventDefault();
     var name = this.screenNameInput.value;
-    var payload = '"' + name + '"';
+    var payload = JSON.stringify(name);
     const headers = {
+      'Authorization': 'Bearer ' + this.jwt,
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
@@ -157,8 +193,9 @@ var Setup = {
   handleScreenPasswordSubmit: function(e) {
     e.preventDefault();
     var password = this.screenPasswordInput.value;
-    var payload = '"' + password + '"';
+    var payload = JSON.stringify(password);
     const headers = {
+      'Authorization': 'Bearer ' + this.jwt,
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
@@ -167,14 +204,28 @@ var Setup = {
       body: payload,
       headers: headers
     };
-    fetch(this.PASSWORD_PATH, request).then((response) => {
+    fetch(this.PASSWORD_PATH, request).then(response => {
       if (!response.ok) {
-        console.error('Failed to set password');
-      } else {
-        this.screenPasswordSection.classList.add('hidden');
-        this.showWifiConnectSection();
+        console.error('Failed to set password.');
+        // TODO: Inform the user something went wrong.
+        return;
       }
-    }).catch((error) => {
+      // Log user in immediately
+      response.json().then(data => {
+        if (data.jwt) {
+          this.jwt = data.jwt;
+          localStorage.setItem('jwt', data.jwt);
+          this.screenPasswordSection.classList.add('hidden');
+          this.showWifiConnectSection();
+        } else {
+          console.error('No authentication token found.');
+          // TODO: Inform user something went wrong
+        }
+      }).catch(error => {
+        console.error('Problem parsing authentication token.');
+        // TODO: Inform the user something went wrong
+      });
+    }).catch(error => {
       console.error(error);
     });
   },
@@ -216,8 +267,9 @@ var Setup = {
    * }
    */
   getWifiAccessPoints: function() {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const headers = {
+        'Authorization': 'Bearer ' + this.jwt,
         'Accept': 'application/json'
       };
       const request = {
@@ -366,6 +418,7 @@ var Setup = {
         payload.password = password;
       }
       const headers = {
+        'Authorization': 'Bearer ' + this.jwt,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       };
