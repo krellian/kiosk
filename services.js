@@ -19,10 +19,12 @@ var Services = {
     // Start database and credential manager
     database.start()
     .then(() => credentials.start())
-    .catch((error) => {console.log(error)});
+    .catch((error) => {console.error(error)});
 
-    // Start network manager
-    network.start();
+    // Start network manager and create Wi-Fi access point
+    network.start()
+    .then(() => {network.createWifiAccessPoint('Krellian Kiosk');})
+    .catch((error) => {console.error(error)});
 
     // Start HTTP server
     this.server = express();
