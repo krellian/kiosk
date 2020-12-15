@@ -73,9 +73,7 @@ $ ssh joebloggs@192.168.1.123
 - Install the mir-kiosk, pulseaudio and network-manager snaps (Note: You might be interrupted at this point by snapd rebooting the system one or more times to apply system updates)
 
 ```
-$ snap install mir-kiosk
-$ snap install pulseaudio
-$ snap install network-manager
+$ snap install mir-kiosk pulseaudio network-manager
 ```
 
 (Note: network-manager may drop the network connection after installation, at which point you'll need to hard reboot the Pi and find its new IP address in order to SSH in again)
@@ -85,7 +83,8 @@ $ snap install network-manager
 ```
 $ snap install --dangerous ./krellian-kiosk_0.1_armhf.snap
 $ snap connect krellian-kiosk:network-manager network-manager:service
-$ snap restart krellian-kiosk
+$ snap connect krellian-kiosk:x11-plug krellian-kiosk:x11
+$ sudo reboot
 ```
 
 The kiosk client should then start up full screen and the remote web interface should be running on port 80 of the Raspberry Pi's IP address, e.g. http://192.168.1.123
@@ -97,7 +96,7 @@ View service status with:
 ```
 $ systemctl status -l snap.krellian-kiosk.krellian-kiosk.service
 ```
-Follow logs with: 
+Follow logs with:
 
 ```
 $ sudo journalctl -fu snap.krellian-kiosk.krellian-kiosk.service

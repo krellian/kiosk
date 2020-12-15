@@ -22,6 +22,11 @@ const Kiosk = {
     let args = parseArgs(electron.remote.process.argv.slice(2));
     let httpPort = args.p || DEFAULT_PORT;
 
+    // If port configured by systemd, assume port 80
+    if (httpPort == 'systemd') {
+      httpPort = '80';
+    }
+
     // Load placeholder page
     this.webview.src = DEFAULT_HOST + ':'  + httpPort + DEFAULT_PAGE;
 
