@@ -14,9 +14,9 @@ It acts as both a web client (to render web content) and a web server (so that s
 
 <img src="https://krellian.com/images/krellian_os_screenshot.png" width="500">
 
-## Getting Started
+## Building
 
-To get started hacking on Krellian Kiosk first make sure that you have [Git](https://git-scm.com/), [NodeJS](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) installed.
+To get started hacking on Krellian Kiosk first make sure that you have [Git](https://git-scm.com/) installed.
 
 Clone the kiosk repository from GitHub:
 
@@ -24,6 +24,10 @@ Clone the kiosk repository from GitHub:
 $ git clone https://github.com/krellian/kiosk.git
 $ cd kiosk
 ```
+
+### Build for Linux desktop
+
+To build for Linux desktop, first make sure that you have [NodeJS](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) installed.
 
 Install dependencies and build for correct node version:
 ```
@@ -44,12 +48,22 @@ The kiosk client should then start up full screen and the remote web interface s
 
 The web client uses Electron and the web server uses NodeJS.
 
+### Build for Ubuntu Core
+To build the snap package for Ubuntu core, first make sure that you have [snapcraft](https://snapcraft.io/docs/snapcraft-overview) installed.
+
+Build for armhf using the snapcraft remote build service:
+
+```
+$ snapcraft remote-build
+```
+
+Tip: If you built locally first, you might want to remove the node_modules directory to save time uploading source code to the remote build server.
+
 ## Install on Ubuntu Core
 
-To install a pre-release snap package of Krellian Kiosk on Ubuntu Core (currently only supported on Raspberry Pi, Raspberry Pi 3 recommended):
+To install a a built snap package of Krellian Kiosk on Ubuntu Core (currently only supported on armhf, Raspberry Pi 3 recommended):
 - Follow the [instructions](https://ubuntu.com/download/raspberry-pi-core) to download, flash and configure Ubuntu Core on a Raspberry Pi and connect a display to the Pi
-- Download the [latest developer build](https://build.snapcraft.io/user/krellian/kiosk/) by clicking on a build, copying and pasting the URL from the first line in the build log and downloading the krellian-kiosk_0.1_armhf.snap file to your desktop computer
-- Copy the snap package to the Raspberry Pi then SSH into it, using the IP address displayed on the screen and the username you assigned to your Ubuntu SSO account e.g.
+- Copy the built .snap package to the Raspberry Pi then SSH into it, using the IP address displayed on the screen and the username you assigned to your Ubuntu SSO account e.g.
 
 ```
 $ scp krellian-kiosk_0.1_armhf.snap joebloggs@192.168.1.123:~/
@@ -76,12 +90,26 @@ $ snap restart krellian-kiosk
 
 The kiosk client should then start up full screen and the remote web interface should be running on port 80 of the Raspberry Pi's IP address, e.g. http://192.168.1.123
 
+### Debugging
+
+View service status with:
+
+```
+$ systemctl status -l snap.krellian-kiosk.krellian-kiosk.service
+```
+Follow logs with: 
+
+```
+$ sudo journalctl -fu snap.krellian-kiosk.krellian-kiosk.service
+```
+
+
 ## Command Line Arguments
 
 The Krellian Kiosk application accepts command line arguments as follows:
 
 ```
--p        HTTP port for system services (default 8080)
+-p        HTTP port for system services (default 8080, special value "systemd" gets port from systemd)
 ```
 
 e.g.
