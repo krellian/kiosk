@@ -12,22 +12,92 @@ const Network = {
   /**
    * Start network manager by opening connection to system bus and finding
    * primary Wi-Fi adapter.
+   *
+   * @returns {Promise} Resolves on successfully finding Wi-Fi adapter.
    */
   start: function() {
-    console.log('Starting network manager...');
+    return new Promise((resolve, reject) => {
+      console.log('Starting network manager...');
 
-    try {
-      this.systemBus = DBus.getBus('system');
-    } catch (error) {
-      console.error('Failed to access system bus ' + error);
-    }
-
-    this.getWiFiDevices().then((wifiDevices) => {
-      if(wifiDevices.length > 0) {
-        this.wifiAdapter = wifiDevices[0];
+      try {
+        this.systemBus = DBus.getBus('system');
+      } catch (error) {
+        console.error('Failed to access system bus ' + error);
+        reject();
       }
-    }).catch((error) => {
-      console.error('Unable to find a Wi-Fi adapter: ' + error);
+
+      this.getWiFiDevices().then((wifiDevices) => {
+        if(wifiDevices.length > 0) {
+          this.wifiAdapter = wifiDevices[0];
+            resolve();
+        } else {
+          reject();
+        }
+      }).catch((error) => {
+        console.error('Unable to find a Wi-Fi adapter: ' + error);
+        reject();
+      });
+    });
+  },
+
+  /**
+   * Creates a Wi-Fi Access Point for clients to connect to in order to carry
+   * out first time setup.
+   */
+  createWifiAccessPoint: function(ssid) {
+    return new Promise((resolve, reject) => {
+      this.systemBus.getInterface('org.freedesktop.NetworkManager',
+        '/org/freedesktop/NetworkManager',
+        'org.freedesktop.NetworkManager',
+        (error, interface) => {
+
+        if (error) {
+          reject(error);
+        }
+
+        // Convert SSID to an array of bytes
+        let ssidBytes = [];
+        for (let i = 0; i < ssid.length; ++i) {
+          ssidBytes.push(ssid.charCodeAt(i));
+        }
+
+        // Access point connection information
+        let connectionInfo = {
+          '802-11-wireless': {
+            'ssid': ssidBytes,
+            'mode': 'ap',
+            //'band': 'bg',
+            //'hidden': false
+          },
+          //'802-11-wireless-security': {
+          //  'key-mgmt': 'wpa-psk',
+          //  'psk': 'password',
+          //},
+          'connection': {
+            'id': ssid,
+            'autoconnect': false,
+            'type': '802-11-wireless',
+            //'inteface-name': 'wlan0',
+          },
+          'ipv4': {
+            'method': 'manual',
+            'address-data': {
+              'address': '192.168.2.1',
+              'prefix': 24,
+            }
+          }
+        };
+
+        interface.AddAndActivateConnection(connectionInfo, this.wifiAdapter, '/',
+          function(error, value) {
+          if (error) {
+            console.error(error);
+            reject(error);
+          }
+          resolve(value);
+        });
+
+      });
     });
   },
 
