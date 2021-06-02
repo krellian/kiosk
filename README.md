@@ -6,13 +6,7 @@ Krellian Kiosk is a web runtime for interactive kiosks and digital signage.
 
 It acts as both a web client (to render web content) and a web server (so that screens can be remotely managed over the internet).
 
-*Web Interface*
-
-<img src="https://krellian.com/products/box-c19/images/krellian_box_ui.png" width="500">
-
-*System Chrome*
-
-<img src="https://krellian.com/images/krellian_os_screenshot.png" width="500">
+<img src="https://krellian.com/products/player/images/krellian_player_ui.png" width="500">
 
 ## Building
 
@@ -31,6 +25,7 @@ To build for Linux desktop, first make sure that you have [NodeJS](https://nodej
 
 Install dependencies and build for correct node version:
 ```
+$ sudo apt-get install build-essential
 $ sudo apt-get install libdbus-1-dev
 $ sudo apt-get install libglib2.0-dev
 $ npm install -g node-gyp
