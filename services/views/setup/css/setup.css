@@ -69,6 +69,7 @@ h1 {
 
 #wifi-connect {
   padding: 2rem;
+  text-align: center;
 }
 
 #wifi-networks {
@@ -77,6 +78,7 @@ h1 {
   margin: 1rem auto;
   width: 100%;
   max-width: 55rem;
+  text-align: left;
 }
 
 .wifi-network-item {
