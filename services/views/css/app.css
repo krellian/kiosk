@@ -29,7 +29,7 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-button, input[type=submit] {
+button, input[type=submit], .button {
   background-color: #648d32;
   height: 3.2rem;
   border-radius: 0.5rem;
@@ -40,7 +40,13 @@ button, input[type=submit] {
   padding: 0 2rem;
 }
 
-button:hover, input[type=submit]:hover {
+.button {
+  display: inline-block;
+  line-height: 3.2rem;
+  text-decoration: none;
+}
+
+button:hover, input[type=submit]:hover, .button:hover {
   background-color: #90bc5c;
 }
 
